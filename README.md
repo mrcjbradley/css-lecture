@@ -3,7 +3,7 @@
 
 A work in progress...
 
-This repo is largely a clone of `reveal.js` being used to create a presentation for lecturing.
+This repo is largely a clone of [`reveal.js`](https://github.com/hakimel/reveal.js) being used to create a presentation for lecturing.
 
 😇
 
