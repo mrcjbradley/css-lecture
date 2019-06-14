@@ -87,6 +87,18 @@ Note:
 
 <img src="https://s3.amazonaws.com/lectures-ckane/Screen+Shot+2018-10-22+at+8.10.45+PM.png" style="float:right; width:70%;"/>
 
+Note:
+- What are some types of Big O categories?
+- constant
+- log
+- square root
+- linear
+- log-linear
+- quadratic
+- polynomial
+- exponential
+- factorial
+
 ---
 
 It's all a matter of counting!
@@ -101,6 +113,11 @@ def example1(n)
 end
 ```
 
+Note: 
+- in terms of time, each step is +1 unless it is in relation to our input 
+- each adjacent step is addition
+- does the number of steps depend on our input size?
+
 ---
 
 O(1)
@@ -109,9 +126,13 @@ O(1)
 
 ```ruby
 def example2(n)
-  n.times { |i| p i }
+  n.times do |i| 
+    print i 
+  end
 end
 ```
+Note: 
+- loops usually signify some kind of operation in terms of n
 
 ---
 
@@ -127,13 +148,17 @@ def example3(n)
       t += 1
     end
   end
-  p t
+  print t
 end
 ```
 
+Note:
+- loop within a loop => higher order
+- two levels of loops => 2nd power 
+
 ---
 
-O(n^2)
+O(n<sup>2</sup>)
 
 ---
 
@@ -145,19 +170,26 @@ def example4(n)
       t += 1
     end
   end
-  p t
+  print t
 end
 ```
 
 ---
 
-O(n^2) 
+O(n<sup>2</sup>) 
 
 ---
 
-Typical pattern. The number of things to do each time is not always n, so it is less than `n^2` in total, right? Sort of...
+- Typical pattern. 
+- The number of things to do each time is not always n 
 
-If you count it all out, we are adding up from `1..n`. This results in `n(n+1)/2`, which is still `n^2`.
+Note:
+On the first iteration, the inner loop iterates once.
+"" for second iteration
+last loop is n
+on average 
+
+If you count it all out, we are adding up from `1..n`. This results in `n(n+1)/2`, which is still `n^2` after removing constants .
 
 ---
 
@@ -256,7 +288,7 @@ If we input 5, the total number of calls is `2^(n+1) - 1` => `O(2^n)`
 ```ruby
 def example9(n)
   return 1 if n == 0
-  n.times { p n } if n.odd?
+  n.times { print n } if n.odd?
   example9(n-1) * example9(n-1)
 end
 ```
@@ -264,7 +296,7 @@ note: turn and talk
 
 ---
 
-O(n * 2^n)
+O(n * 2<sup>n</sup>)
 
 ---
 
@@ -284,13 +316,13 @@ def example10(n)
       t += 1
     end
   end
-  p t
+  print t
 end
 ```
 
 ---
 
-O(n^2 * logn)
+O(n<sup>2</sup> * logn)
 
 ---
 
@@ -307,6 +339,7 @@ If we count everything up we get
 ```
 Sum from i=1 to n^2 of:
 log10(i)
+
 ```
 
 This should give us a Time Complexity of around `O(n^2 * log10(n^2))`; once we normalize the base of the logarithm and discard the constant factor this is `O(n^2 * logn)`.
