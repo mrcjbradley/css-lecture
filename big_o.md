@@ -33,22 +33,43 @@ question for class: what is big O?
 
  ![](lib/images/pigeon-vs-broadband.png)
 
+---
+
+`O(1)` vs. `O(n)` where `n = filesize`
 
 ---
 
-* Constant
-* Logarithmic
-* Square Root
-* Linear
-* Log-Linear
-* Quadratic
-* Polynomial
-* Exponential
-* Factorial
+<ul style="float:left">
+    <li class="fragment fade-in">
+        Constant
+    </li>
+    <li class="fragment fade-in">
+        Logarithmic
+    </li>
+    <li class="fragment fade-in">
+        Square Root
+    </li>
+    <li class="fragment fade-in">
+        Linear
+    </li>
+    <li class="fragment fade-in">  
+        Log-Linear
+    </li>
+    <li class="fragment fade-in">
+        Quadratic
+    </li>
+    <li class="fragment fade-in">
+        Polynomial
+    </li>
+    <li class="fragment fade-in">
+        Exponential
+    </li>
+    <li class="fragment fade-in">
+        Factorial
+    </li>
+</ul>
 
----
-
-![](https://s3.amazonaws.com/lectures-ckane/Screen+Shot+2018-10-22+at+8.10.45+PM.png)
+<img src="https://s3.amazonaws.com/lectures-ckane/Screen+Shot+2018-10-22+at+8.10.45+PM.png" style="float:right; width:70%;"/>
 
 ---
 
