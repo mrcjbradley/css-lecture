@@ -86,18 +86,7 @@ Note:
 </ul>
 
 <img src="https://s3.amazonaws.com/lectures-ckane/Screen+Shot+2018-10-22+at+8.10.45+PM.png" style="float:right; width:70%;"/>
-
-Note:
-- What are some types of Big O categories?
-- constant
-- log
-- square root
-- linear
-- log-linear
-- quadratic
-- polynomial
-- exponential
-- factorial
+<div style="clear:both;">&nbsp;</div>
 
 ---
 
@@ -207,7 +196,7 @@ O(logn)
 
 ---
 
-Typical of logarithmic time complexity. Reducing the data set by a factor each time. Remember MergeSort?
+- Typical of logarithmic time complexity. Reducing the data set by a factor each time. Remember MergeSort?
 
 ---
 
@@ -215,7 +204,7 @@ Typical of logarithmic time complexity. Reducing the data set by a factor each t
 def example5_5(arr1, arr2)
     arr1.each do |a1|
      arr2.each do |a2|
-      p a1, a2
+      print a1, a2
      end
     end
 end
@@ -223,11 +212,13 @@ end
 
 ---
 
-    O(n * m)
+    O(n * m), where n = arr1 and m = arr2
 
 ---
 
-explanation goes here
+- both `arr1` and `arr2` have an impact on the overall complexity of this function
+- we want to consider their individual impact on the number of steps required and express that in terms of Big O
+- in this case, `m` steps are nested in each of the `n` steps => `O(n * m)` or `O(nm)`
 
 ---
 
@@ -257,9 +248,9 @@ end
 O(n)
 
 note:
-Best Case: Constant,
+Best Case: Constant
 
-Worst Case: Linear
+_*Worst Case:*_ Linear
 
 ---
 
@@ -270,12 +261,9 @@ def example8(n)
 end
 ```
 
-note: 
-ask the audience 
-
 ---
 
-O(2^n)
+O(2<sup>n</sup>)
 
 ---
 
@@ -292,7 +280,6 @@ def example9(n)
   example9(n-1) * example9(n-1)
 end
 ```
-note: turn and talk
 
 ---
 
@@ -312,7 +299,9 @@ def example10(n)
   t = 0
   n.times do
     n.times do  
-      t.to_s.split('').each { |el| p el }
+      t.to_s.split('').each do |el| 
+        print el 
+      end
       t += 1
     end
   end
@@ -326,31 +315,30 @@ O(n<sup>2</sup> * logn)
 
 ---
 
-The key question here is: What is contained in the double loop?
+- The key question here is: What is contained in the double loop?
 
-For each iteration we do extra work equal to the number of digits of the current number. Do you see that?
+- For each iteration we do extra work equal to the number of digits of the current number. Do you see that?
 
-The number of digits is roughly equal to `log10(n)`
+- The number of digits is roughly equal to `log10(n)`
 
 ---
 
-If we count everything up we get
+- If we count everything up we get
 
-```
-Sum from i=1 to n^2 of:
-log10(i)
 
-```
+Sum from i=1 to n<sup>2</sup> of log10(i)
 
-This should give us a Time Complexity of around `O(n^2 * log10(n^2))`; once we normalize the base of the logarithm and discard the constant factor this is `O(n^2 * logn)`.
 
-For `n=100` the total number of prints is 38,890;
+
+- This should give us a Time Complexity of around `O(n^2 * log10(n^2))`; once we normalize the base of the logarithm and discard the constant factor this is `O(n^2 * logn)`.
+
+- For `n=100` the total number of prints is 38,890;
 
 ---
 
 ```ruby
 def example11(n)
-  p n
+  print n
   n.times do
     example11(n-1)
   end
@@ -359,16 +347,28 @@ end
 
 ---
 
-Factorial: `n=5` results in 4 more calls, each of which results in 3 more calls...etc.
+- Factorial: `n=5` results in 4 more calls, each of which results in 3 more calls...etc.
 
 ---
 
 
-# General Approach 
-* Identify n (or necessary variables)
-* Walk through algorithm tracking step/space in terms of n — add adjacent steps; multiply blocks within blocks; etc. 
-* Consider recursion 
-* Eliminate all but highest order term
-* Eliminate coefficients 
-
----
+<h3>General Approach</h3>
+<ul>
+  <li>
+    Identify n (or necessary variables)
+  </li>
+  <li>
+    Walk through algorithm tracking step/space in terms of n &mdash; add adjacent steps; multiply blocks within 
+  </li><li>
+    blocks; etc. 
+  </li>
+  <li>
+    Consider recursion 
+  </li>
+  <li>
+    Eliminate all but highest order term
+  </li>
+  <li>
+    Eliminate coefficients 
+  </li>
+</ul>
