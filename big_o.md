@@ -4,34 +4,36 @@
 
 <!-- .slide: data-transition="zoom" -->
 
-
 ---
 
 # What is big o?
-* Big-O notation is a relative representation of the complexity of an algorithm. ([from stackoverflow](https://stackoverflow.com/questions/487258/what-is-a-plain-english-explanation-of-big-o-notation)) 
-<!-- .element: class="fragment fade-up" --> 
 
-* Big O notation is the language we use for talking about ***how long*** [and ***how much space***] an algorithm takes to run. It's how we compare the efficiency of different approaches to a problem. ([from interviewcake.com](https://www.interviewcake.com/article/ruby/big-o-notation-time-and-space-complexity))
-<!-- .element: class="fragment fade-up" --> 
+- Big-O notation is a relative representation of the complexity of an algorithm. ([from stackoverflow](https://stackoverflow.com/questions/487258/what-is-a-plain-english-explanation-of-big-o-notation))
 
-Note: 
-question for class: what is big O? 
+  <!-- .element: class="fragment fade-up" -->
 
+- Big O notation is the language we use for talking about **_how long_** [and ***how much space***] an algorithm takes to run. It's how we compare the efficiency of different approaches to a problem. ([from interviewcake.com](https://www.interviewcake.com/article/ruby/big-o-notation-time-and-space-complexity))
+  <!-- .element: class="fragment fade-up" -->
+
+Note:
+question for class: what is big O?
 
 ---
 
 ## Who will win?
 
-<img src="./lib/images/pigeon_racer.jpeg" width="25%" style="margin-top:0px;"><!-- .element: class="fragment fade-in" --> 
-<p style="font-size: 0.3em; margin-top:0px;">Photo Illustration by Emil Lend of/The Daily Beast</p><!-- .element: class="fragment fade-in" --> 
+<p style="font-size: 0.3em; margin-top:0px;"><img src="./lib/images/pigeon_racer.jpeg" width="25%" style="margin-top:0px;"><br/>Photo Illustration by Emil Lend of/The Daily Beast</p><!-- .element: class="fragment fade-in" -->
 
-#### VS.
+<!-- <p style="font-size: 0.3em; margin-top:0px;">Photo Illustration by Emil Lend of/The Daily Beast</p>.element: class="fragment fade-in" -->
 
-<img src="https://media.giphy.com/media/FOOwKn00mZyjVjX7pk/giphy.gif" width="25%"><!-- .element: class="fragment fade-in" --> 
+#### VS.<!-- .element: class="fragment fade-in" -->
+
+<img src="https://media.giphy.com/media/FOOwKn00mZyjVjX7pk/giphy.gif" width="25%"><!-- .element: class="fragment fade-in" -->
 
 Note:
 
-- we want to send an awesome video to a coworker accross town—which will be faster 
+- we want to send an awesome video to a coworker accross town&mdash;which will be faster
+
   - (a) save the video to a stick drive, tie the stick drive to a pigeon, and send it on over
   - (b) send it over the internet
 
@@ -39,15 +41,15 @@ Note:
 
 ---
 
- ![](lib/images/pigeon-vs-broadband.png)
+![](lib/images/pigeon-vs-broadband.png)
 
- Note:
- - reminder: efficiency of an algorithm => we can think about this in terms of **time** and **space**
- - we spend a lot of time thinking about **time** in comparison to **space** because **space** is cheaper now 
- - Both are in terms of input
+Note:
 
- - we can assume the pigeons fly at a constant average rate and along the same route each time
- 
+- reminder: efficiency of an algorithm => we can think about this in terms of **time** and **space**
+- we spend a lot of time thinking about **time** in comparison to **space** because **space** is cheaper now
+- Both are in terms of input
+
+- we can assume the pigeons fly at a constant average rate and along the same route each time
 
 ---
 
@@ -85,7 +87,8 @@ Note:
     </li>
 </ul>
 
-<img src="https://s3.amazonaws.com/lectures-ckane/Screen+Shot+2018-10-22+at+8.10.45+PM.png" style="float:right; width:70%;"/>
+<img src="https://s3.amazonaws.com/lectures-ckane/Screen+Shot+2018-10-22+at+8.10.45+PM.png" class="fragment fade-in" style="float:right; width:70%;"/>
+
 <div style="clear:both;">&nbsp;</div>
 
 ---
@@ -94,224 +97,233 @@ It's all a matter of counting!
 
 ---
 
-```ruby
-def example1(n)
-  n = 3n + 2
-  n += 40n
-  n**5
-end
+```javascript
+function randomMath(n) {
+  let result = n;
+  result = 3 * result + 2;
+  result += 40 * result;
+  result = 5 * result;
+  return result;
+}
 ```
 
-Note: 
-- in terms of time, each step is +1 unless it is in relation to our input 
+Note:
+
+- in terms of time, each step is +1 unless it is in relation to our input
 - each adjacent step is addition
 - does the number of steps depend on our input size?
 
 ---
 
-O(1)
+| time  | O(1) |
+| ----- | ---- |
+| space | O(1) |
 
 ---
 
-```ruby
-def example2(n)
-  n.times do |i| 
-    print i 
-  end
-end
+```javascript
+function printNTimes(n) {
+  for (let i = 0; i < n; i++) {
+    console.log(i);
+  }
+}
 ```
-Note: 
+
+Note:
+
 - loops usually signify some kind of operation in terms of n
 
 ---
 
-O(n)
+| time  | O(n) |
+| ----- | ---- |
+| space | O(1) |
 
 ---
 
-```ruby
-def example3(n)
-  t = 0
-  n.times do
-    n.times do  
-      t += 1
-    end
-  end
-  print t
-end
+```javascript
+function bubbleSort(array) {
+  let swapped = true;
+
+  while (swapped) {
+    swapped = false;
+
+    for (let i = 0; i < array.length - 1; i++) {
+      if (array[i] > array[i + 1]) {
+        [array[i], array[i + 1]] = [array[i + 1], array[i]];
+        swapped = true;
+      }
+    }
+  }
+
+  return array;
+}
 ```
 
 Note:
+
 - loop within a loop => higher order
-- two levels of loops => 2nd power 
+- two levels of loops => 2nd power
+- Typical pattern.
+- The number of things to do each time is not always n
 
 ---
 
-O(n<sup>2</sup>)
+| time  | O(n<sup>2</sup>) |
+| ----- | ---------------- |
+| space | O(1)             |
 
 ---
 
-```ruby
-def example4(n)
-  t = 0
-  (1..n).each do |i|
-    i.times do  
-      t += 1
-    end
-  end
-  print t
-end
+```javascript
+function binarySearch(array, target) {
+  if (array.length === 0) {
+    return false;
+  }
+
+  let midIdx = Math.floor(array.length / 2);
+  let leftHalf = array.slice(0, midIdx);
+  let rightHalf = array.slice(midIdx + 1);
+
+  if (target < array[midIdx]) {
+    return binarySearch(leftHalf, target);
+  } else if (target > array[midIdx]) {
+    return binarySearch(rightHalf, target);
+  } else {
+    return true;
+  }
+}
 ```
 
 ---
 
-O(n<sup>2</sup>) 
+| time  | O(logn)    |
+| ----- | ---------- |
+| space | O(n\*logn) |
 
 ---
 
-- Typical pattern. 
-- The number of things to do each time is not always n 
-
-Note:
-On the first iteration, the inner loop iterates once.
-"" for second iteration
-last loop is n
-on average 
-
-If you count it all out, we are adding up from `1..n`. This results in `n(n+1)/2`, which is still `n^2` after removing constants .
+- Typical of logarithmic time complexity: Reducing the data set by a factor each time.
+- We must consider the stack call we are making in each recursive step as a unit of space
+- `Array.prototype.slice()` creates a new array&mdash;Consider how we might reduce space complexity. What trade-offs are we making to do so?
 
 ---
 
-```ruby
-def example5(n)
-  while n > 0
-    n /= 2
-  end
-end
+```javascript
+function compareArrays(matrix) {
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row]; col++) {
+      console.log(matrix[row][col]);
+    }
+  }
+}
 ```
 
 ---
 
-O(logn)
+| time  | O(n \* m), where n = number of rows and m = number of columns |
+| ----- | ------------------------------------------------------------- |
+| space | O(1)                                                          |
 
 ---
 
-- Typical of logarithmic time complexity. Reducing the data set by a factor each time. Remember MergeSort?
-
----
-
-```ruby
-def example5_5(arr1, arr2)
-    arr1.each do |a1|
-     arr2.each do |a2|
-      print a1, a2
-     end
-    end
-end
-```
-
----
-
-    O(n * m), where n = arr1 and m = arr2
-
----
-
-- both `arr1` and `arr2` have an impact on the overall complexity of this function
+- Lengths of both outer array and subarrays have an impact on the overall complexity of this function
 - we want to consider their individual impact on the number of steps required and express that in terms of Big O
 - in this case, `m` steps are nested in each of the `n` steps => `O(n * m)` or `O(nm)`
 
 ---
 
-
-```ruby
-def example6(n)
-  return 1 if n == 0
-  example6(n-1)
+```javascript
+fucntion evenOrDoSomeWork(num)
+  if (num % 2 === 0 || num < 0 ) return 1;
+  console.log( "working ...");
+  evenOrDoSomeWork(num-2);
 end
 ```
 
 ---
 
-O(n) Time and Space
-
----
-
-```ruby
-def example7(n)
-  return 1 if n.even? || n < 0
-  example7(n-2)
-end
-```
-
----
-
-O(n)
+| time  | O(n) |
+| ----- | ---- |
+| space | 0(n) |
 
 note:
 Best Case: Constant
-
 _*Worst Case:*_ Linear
 
 ---
 
-```ruby
-def example8(n)
-  return 1 if n == 0
-  example8(n-1) * example8(n-1)
-end
+```javascript
+function fibonacci(number) {
+  if (number <= 1) return number;
+  return fibonacci(number - 2) + fibonacci(number - 1);
+}
 ```
 
 ---
 
-O(2<sup>n</sup>)
+| time  | O(2<sup>n</sup>) |
+| ----- | ---------------- |
+| space | O(n)             |
 
 ---
 
-This is a branching recursive tree. Since each call results in two more calls, we multiply by two for each level of the tree.
-
-If we input 5, the total number of calls is `2^(n+1) - 1` => `O(2^n)`
+- This is a branching recursive tree. Since each call results in two more calls, we multiply by two for each level of the tree.
+- Based on our input and base case, the total number of calls is `2^(n-2) + 3` => `O(2^n)`
+- In terms of space complexity, we need to consider the maximum depth of the recursive calls `O(n)`
 
 ---
 
-```ruby
-def example9(n)
-  return 1 if n == 0
-  n.times { print n } if n.odd?
-  example9(n-1) * example9(n-1)
-end
+```javascript
+function fibonacciOddShoutOut(number) {
+  if (number <= 1) return number;
+  if (number % 2 !== 0) {
+    for (let i = 0; i < number; i++) {
+      console.log(`Odd Number Y'all!!!`);
+    }
+  }
+  return fibonacci(number - 2) + fibonacci(number - 1);
+}
 ```
 
 ---
 
-O(n * 2<sup>n</sup>)
+| time  | O(n \* 2<sup>n</sup>) |
+| ----- | --------------------- |
+| space | O(n)                  |
 
 ---
 
-- Example 9 is a branching tree which gives us a lower bound of `O(2^n)`
+- fibonacciOddShoutOut is a branching tree which gives us a lower bound of `O(2^n)`
 - However, there is extra stuff going on. Sometimes we do extra stuff that depends on `n`.
 - If there were `n` things going on for each recursive call, then our time complexity would be `O(n*2^n)`. This is the upper bound
 - Counting up exactly how much stuff is going on, given that only odd numbers result in extra work, is outside the scope of what you should expect to be able to do in an interview. It is a fun math challenge to try though!
 
 ---
 
-```ruby
-def example10(n)
-  t = 0
-  n.times do
-    n.times do  
-      t.to_s.split('').each do |el| 
-        print el 
-      end
-      t += 1
-    end
-  end
-  print t
-end
+```javascript
+function digify(num) {
+  let tempNum = 0;
+  for (let i = 0; i < num; i++) {
+    for (let i = 0; i < num; i++) {
+      tempNum
+        .toString(10)
+        .split("")
+        .forEach(el => {
+          console.log(el);
+        });
+    }
+    tempNum++;
+  }
+  console.log(tempNum);
+}
 ```
 
 ---
 
-O(n<sup>2</sup> * logn)
+| time  | O(n<sup>2</sup> \* logn) |
+| ----- | ------------------------ |
+| space | O(1)                     |
 
 ---
 
@@ -325,10 +337,7 @@ O(n<sup>2</sup> * logn)
 
 - If we count everything up we get
 
-
 Sum from i=1 to n<sup>2</sup> of log10(i)
-
-
 
 - This should give us a Time Complexity of around `O(n^2 * log10(n^2))`; once we normalize the base of the logarithm and discard the constant factor this is `O(n^2 * logn)`.
 
@@ -336,21 +345,22 @@ Sum from i=1 to n<sup>2</sup> of log10(i)
 
 ---
 
-```ruby
-def example11(n)
-  print n
-  n.times do
-    example11(n-1)
-  end
-end
+```javascript
+function avoidThisComplexity(num) {
+  if (num <= 1) return 1;
+  return num * avoidThisComplexity(num - 1);
+}
 ```
 
 ---
 
+| time  | O(n!) |
+| ----- | ----- |
+| space | O(n)  |
+
 - Factorial: `n=5` results in 4 more calls, each of which results in 3 more calls...etc.
 
 ---
-
 
 <h3>General Approach</h3>
 <ul>
@@ -358,12 +368,10 @@ end
     Identify n (or necessary variables)
   </li>
   <li>
-    Walk through algorithm tracking step/space in terms of n &mdash; add adjacent steps; multiply blocks within 
-  </li><li>
-    blocks; etc. 
+    Walk through algorithm tracking step/space in terms of n &mdash; add adjacent steps; multiply blocks within blocks; etc. 
   </li>
   <li>
-    Consider recursion 
+    Consider how recursion affects space and time complexity
   </li>
   <li>
     Eliminate all but highest order term
