@@ -210,9 +210,15 @@ function binarySearch(array, target) {
 ---
 
 ```javascript
-function compareArrays(matrix) {
+const sampleMatrix = [
+  [0,1,1,1,0],
+  [1,0,0,1,1],
+  [0,0,0,1,"hello"]
+]
+
+function printMatrix(matrix) {
   for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix[row]; col++) {
+    for (let col = 0; col < matrix[row].length; col++) {
       console.log(matrix[row][col]);
     }
   }
